@@ -7,7 +7,7 @@ object fTreeViewVes: TfTreeViewVes
   ClientHeight = 461
   ClientWidth = 752
   OnShow = FormShow
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '3.6.0.0'
   object DBTreeView1: TDBTreeView
     Left = 0
     Height = 461
@@ -51,6 +51,7 @@ object fTreeViewVes: TfTreeViewVes
     DrawPanel = Panel1
     Options = [dgpIndicator]
     TabOrder = 1
+    KeyField = 'EMP_NO'
     ColWidths = (
       12
       375
@@ -58,10 +59,11 @@ object fTreeViewVes: TfTreeViewVes
     object Panel1: TPanel
       Left = 12
       Height = 50
-      Top = 0
-      Width = 375
+      Top = 8
+      Width = 367
       ClientHeight = 50
-      ClientWidth = 375
+      ClientWidth = 367
+      ParentBackground = False
       TabOrder = 0
       object Label1: TLabel
         Left = 8
@@ -131,22 +133,21 @@ object fTreeViewVes: TfTreeViewVes
   object DataSource1: TDataSource
     DataSet = SQLQuery1
     Left = 224
-    Top = 60
+    Top = 32
   end
   object IBConnection1: TIBConnection
     Connected = False
     LoginPrompt = False
-    KeepDatasetsOpenOnDisconnect = False
     DatabaseName = 'localhost:employee'
     KeepConnection = False
-    Password = 'masterkey'
+    Password = '1224'
     Transaction = SQLTransaction1
-    UserName = 'sysdba'
+    UserName = 'SYSDBA'
     CheckTransactionParams = False
     UseConnectionCharSetIfNone = False
     WireCompression = True
-    Left = 227
-    Top = 111
+    Left = 224
+    Top = 88
   end
   object SQLTransaction1: TSQLTransaction
     Active = False
@@ -610,7 +611,7 @@ object fTreeViewVes: TfTreeViewVes
   end
   object DataSource2: TDataSource
     DataSet = SQLQuery2
-    Left = 252
-    Top = 320
+    Left = 136
+    Top = 291
   end
 end

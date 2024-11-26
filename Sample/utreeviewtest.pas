@@ -6,13 +6,13 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
-  StdCtrls, ExtCtrls, DBCtrls, DBTreeView, dbcntrlgrid, DB, SQLDB,IBConnection;
+  StdCtrls, ExtCtrls, DBCtrls, DBTreeView, dbcntrlgrid, DB, SQLDB, IBConnection;
 
 type
 
   { TfTreeViewVes }
 
-  TfTreeViewVes = class(TForm)
+  TfTreeViewVes = class (TForm)
     ActionList1: TActionList;
     AddChild: TAction;
     AddFirstChild: TAction;
@@ -36,7 +36,7 @@ type
     MenuItem4: TMenuItem;
     Panel1: TPanel;
     PopupMenu1: TPopupMenu;
-    IBConnection1 : TIBConnection;
+    IBConnection1: TIBConnection;
     SQLQuery1: TSQLQuery;
     SQLQuery1BUDGET: TBCDField;
     SQLQuery1CHILDCOUNT: TLargeintField;
@@ -85,60 +85,60 @@ implementation
 
 procedure TfTreeViewVes.DeleteNodeExecute(Sender: TObject);
 begin
-  if MessageDlg(Format('Do you want to delete the %s department?',[DBTreeview1.Selected.Text]),
-              mtConfirmation,[mbYes,mbNo],0) = mrYes then
-    TDBTreeNode(DBTreeview1.Selected).DeleteAll
+  if MessageDlg(Format('Do you want to delete the %s department?', [DBTreeview1.Selected.Text]),
+    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    TDBTreeNode(DBTreeview1.Selected).DeleteAll;
 end;
 
 procedure TfTreeViewVes.FormShow(Sender: TObject);
 begin
-SQLQuery1.Open;
+  SQLQuery1.Open;
 end;
 
 procedure TfTreeViewVes.AddChildUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled := DBTreeView1.Selected <> nil
+  (Sender as TAction).Enabled := DBTreeView1.Selected <> nil;
 end;
 
 procedure TfTreeViewVes.AddFirstChildExecute(Sender: TObject);
 begin
-  DBTreeView1.Selected.Expand(true);
-  DBTreeView1.Selected := DBTreeView1.Items.AddChildFirst(DBTreeView1.Selected,'');
-  DBTreeView1.Selected.Expand(true);
+  DBTreeView1.Selected.Expand(True);
+  DBTreeView1.Selected := DBTreeView1.Items.AddChildFirst(DBTreeView1.Selected, '');
+  DBTreeView1.Selected.Expand(True);
   DBTreeView1.Selected.EditText;
 end;
 
 procedure TfTreeViewVes.AddSiblingExecute(Sender: TObject);
 begin
-  DBTreeView1.Selected := DBTreeView1.Items.Add(DBTreeView1.Selected,'');
+  DBTreeView1.Selected := DBTreeView1.Items.Add(DBTreeView1.Selected, '');
   DBTreeView1.Selected.EditText;
 end;
 
 procedure TfTreeViewVes.DBTreeView1SelectionChanged(Sender: TObject);
 begin
-  if Assigned( DBTreeView1.Selected ) then begin
-    lblData.Caption := TDBTreeNode(DBTreeView1.Selected).DataValue.Values['PHONE_NO'];
-    DBCntrlGrid1.BeginUpdate;
-    try
-    SQLQuery2.close;
-    if SQLTransaction2.Active then
-      SQLTransaction2.Commit;
-    SQLQuery2.ParamByName('DEPT_NO').Value := SQLQuery1.FieldByName('DEPT_NO').Value;
-    SQLTransaction2.StartTransaction;
-    SQLQuery2.Open;
-    finally
-    DBCntrlGrid1.EndUpdate();
-    end;
+  if Assigned(DBTreeView1.Selected) then
+    begin
+      lblData.Caption := TDBTreeNode(DBTreeView1.Selected).DataValue.Values['PHONE_NO'];
+      DBCntrlGrid1.BeginUpdate;
+      try
+        SQLQuery2.Close;
+        if SQLTransaction2.Active then
+          SQLTransaction2.Commit;
+        SQLQuery2.ParamByName('DEPT_NO').Value := SQLQuery1.FieldByName('DEPT_NO').Value;
+        SQLTransaction2.StartTransaction;
+        SQLQuery2.Open;
+      finally
+        DBCntrlGrid1.EndUpdate();
+      end;
     end;
 end;
 
 procedure TfTreeViewVes.AddChildExecute(Sender: TObject);
 begin
-  DBTreeView1.Selected.Expand(true);
-  DBTreeView1.Selected := DBTreeView1.Items.AddChild(DBTreeView1.Selected,'');
-  DBTreeView1.Selected.Expand(true);
+  DBTreeView1.Selected.Expand(True);
+  DBTreeView1.Selected := DBTreeView1.Items.AddChild(DBTreeView1.Selected, '');
+  DBTreeView1.Selected.Expand(True);
   DBTreeView1.Selected.EditText;
 end;
 
 end.
-
