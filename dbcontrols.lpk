@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <PathDelim Value="\"/>
     <Name Value="dbcontrols"/>
     <Type Value="RunAndDesignTime"/>
@@ -11,6 +11,11 @@
       <SearchPaths>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <UseAnsiStrings Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
     </CompilerOptions>
     <Description Value="Data controls
 DBTreeView Ported from the original IBX Tree view"/>
@@ -27,6 +32,7 @@ DBTreeView Ported from the original IBX Tree view"/>
         <UnitName Value="DBTreeView"/>
       </Item2>
     </Files>
+    <CompatibilityMode Value="True"/>
     <RequiredPkgs Count="2">
       <Item1>
         <PackageName Value="LCL"/>
